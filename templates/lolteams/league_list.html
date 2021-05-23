@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md">
+        <p class="fs-1 text-primary">블루팀</p>
+    </div>
+    <div class="col-md">
+        <p class="fs-1 text-danger">레드팀</p>
+    </div>
+</div>
+{% if league_list %}
+{%for league in league_list %}
+<div class="row">
+    <div class="col">
+        <p class="text-start mb-0">{{league.create_date}}</p>
+    </div>
+</div>
+<div class="row mb-2 mt-0">
+    <div class="col-md ">
+        <ul class="list-group list-group-flush">
+        {% for entry in entry_list %}
+        {% if entry.league.id == league.id and entry.camp == '블루' %}
+            {% if league.blue == "승" %}
+            <li class="list-group-item fw-bold" style="background-color: #ADD8E6">{{entry.name}}</li>
+            {%else%}
+            <li class="list-group-item fw-bold" style="background-color: #FFB6C1;">{{entry.name}}</li>
+            {%endif%}
+        {% endif %} 
+        {% endfor %}   
+        </ul>
+    </div>
+    <div class="col-md ">    
+        <ul class="list-group list-group-flush ">
+        {% for entry in entry_list %}
+        {% if entry.league.id == league.id and entry.camp == '레드' %}
+                {% if league.red == "승" %}
+                <li class="list-group-item fw-bold" style="background-color: #ADD8E6">{{entry.name}}</li>
+                {%else%}
+                <li class="list-group-item fw-bold" style="background-color: #FFB6C1;">{{entry.name}}</li>
+                {%endif%}
+        {% endif %} 
+        {% endfor %}   
+        </ul>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock%}

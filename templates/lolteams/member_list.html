@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <!-- 오류표시 Start -->
+        {% if form.errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {% for field in form %}
+                    {% if field.errors %}
+                    <strong>{{ field.label }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    {{ field.errors }}
+                    {% endif %}
+                {% endfor %}    
+            </div> 
+        {% endif %}
+        <!-- 오류표시 End -->
+        <div class="input-group mb-3">
+            <input type="text" name="name" class="form-control" placeholder="이름을 적어주세요" aria-label="이름을 적어주세요" value="{{ form.name.value|default_if_none:'' }}" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">멤버등록</button>
+        </div>
+    </form>
+    {% if member_list %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">이름</th>
+                    <th scope="col">승</th>
+                    <th scope="col">패</th>
+                    <th scope="col">승률</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for member in member_list %}
+                    <tr class="{% cycle 'table-primary' 'table-secondary' 'table-success' 'table-danger' 'table-warning' 'table-info' %}">
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td class="fw-bold">{{member.name}}</td>
+                        <td>{{member.win}}</td>
+                        <td>{{member.lose}}</td>
+                        <td>{{member.winrate}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+    <p>멤버가 없습니다.</p>
+    {% endif %}
+
+{% endblock%}

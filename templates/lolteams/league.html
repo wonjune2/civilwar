@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load lolteams_filter %}
+{% block content %}
+{% if error %}
+<div class="alert alert-danger" role="alert">
+    {{error}}
+</div>
+{%endif%}
+<form method="post" action="{% url 'lolteams:league' %}">
+    {% csrf_token %}
+<div class="row">
+        {% if blueTeams %}
+        <div class="col-md mb-3">
+            <h1 class="ms-5 fw-bold text-primary mb-3">블루팀</h1>
+            <h1 class="ms-5 fw-bold text-primary mb-3">{{ blue_win_rate }}%</h1>
+            {% for blueTeam in blueTeams %}
+                <div class="row">
+                    <div class="col-md d-flex">
+                        <h5 class="d-flex align-items-center text-primary mx-2">{{blueTeam.winrate|mul:"2"}}%</h5>
+                        <button type="button" class="btn btn-outline-dark w-100 fw-bolder">
+                            {{blueTeam.name}}
+                        </button>
+                        <input type="hidden" name="blueTeam" value="{{blueTeam.id}}" />
+                    </div>
+                </div>
+            {%endfor%}
+        </div>
+        {% endif %}
+        <div class="col-md-2 d-flex align-items-center justify-content-center mb-5">
+            <h1 class="text-danger mt-5">VS</h1>
+        </div>
+        <div class="col-md mb-3">
+            {% if redTeams %}
+            <div class="col-md">
+                <h1 class="me-5 fw-bold text-danger mb-3">레드팀</h1>
+                <h1 class="me-5 fw-bold text-danger mb-3">{{ red_win_rate }}%</h1>
+                {% for redTeam in redTeams %}
+                    <div class="row">
+                        <div class="col-md d-flex">
+                            <button type="button" class="btn btn-outline-dark fw-bolder w-100">
+                                {{redTeam.name}}
+                            </button>
+                            <input type="hidden" name="redTeam" value="{{redTeam.id}}" />
+                            <h5 class="d-flex align-items-center text-danger mx-2">{{redTeam.winrate|mul:"2"}}%</h5>
+                        </div>
+                    </div>
+                {%endfor%}
+            </div>
+            {% endif %}
+        </div>
+</div>
+<div class="row">
+    <div class="col-md mb-3">
+        <select name="blue" class="form-select w-25 mx-auto" id="inputGroupSelect01">
+            <option selected value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+    </div>
+    <div class="col-md mb-3">
+        <select name="red" class="form-select w-25 mx-auto" id="inputGroupSelect01">
+            <option selected value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+    </div>
+</div>
+<div class="row">
+    <div class="col mb-5">
+        <button type="submit" class="btn btn-success">입력</button>
+    </div>
+</div>
+</form>
+{% endblock%}
