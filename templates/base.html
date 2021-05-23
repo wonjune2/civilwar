@@ -7,16 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'bootstrap.min.css' %} ">
     <link rel="stylesheet" href="{% static 'style.css' %} ">
-    {% if user.is_authenticated %}
+    <!-- {% if user.is_authenticated %}
     
     {%else%}
     <link rel="stylesheet" href="{% static 'signin.css' %} ">
-    {%endif%}
+    {%endif%} -->
     <title>LoLTeams</title>
 </head>
 <body class="min-vh-100">
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
-{% if user.is_authenticated %}
+<!-- {% if user.is_authenticated %} -->
 <nav class="navbar navbar-expand-lg navbar-light w-100 mb-5" style="background-color: #e3f2fd;">
   <div class="container-fluid">
     <a class="navbar-brand fs-5" href="{% url 'lolteams:index' %}">팀즈</a>
@@ -44,9 +44,9 @@
 {% endblock %}
 </div>
 <!-- 기본 템플릿 안에 삽입될 내용 End -->
-{% else %}
+<!-- {% else %}
 {% include "common/login.html" %}
-{% endif %}
+{% endif %} -->
 <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
 <script src="{% static 'member.js' %}"></script>
