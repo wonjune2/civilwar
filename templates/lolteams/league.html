@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-md d-flex">
                         <h5 class="d-flex align-items-center text-primary mx-2">{{blueTeam.winrate|mul:"2"}}%</h5>
-                        <button type="button" class="btn btn-outline-dark w-100 fw-bolder">
+                        <button type="button" class="btn btn-outline-dark w-75 fw-bolder">
                             {{blueTeam.name}}
                         </button>
                         <input type="hidden" name="blueTeam" value="{{blueTeam.id}}" />
@@ -37,7 +37,7 @@
                 {% for redTeam in redTeams %}
                     <div class="row">
                         <div class="col-md d-flex">
-                            <button type="button" class="btn btn-outline-dark fw-bolder w-100">
+                            <button type="button" class="btn btn-outline-dark fw-bolder w-75">
                                 {{redTeam.name}}
                             </button>
                             <input type="hidden" name="redTeam" value="{{redTeam.id}}" />

@@ -43,7 +43,10 @@ def index(request):
             for i in redTeams:
                 red_win_rate += i.winrate
             red_win_rate = (red_win_rate / 5) * 100 
-            context = {'blueTeams' : blueTeams, 'redTeams' : redTeams, 'blue_win_rate' : blue_win_rate, 'red_win_rate' : red_win_rate}
+            if(blue_win_rate < red_win_rate) :
+                context = {'blueTeams' : blueTeams, 'redTeams' : redTeams, 'blue_win_rate' : blue_win_rate, 'red_win_rate' : red_win_rate}
+            else :
+                context = {'redTeams' : blueTeams, 'blueTeams' : redTeams, 'red_win_rate' : blue_win_rate, 'blue_win_rate' : red_win_rate}
             return render(request, 'lolteams/league.html', context)
     else :
         member_list = Member.objects.order_by('name')

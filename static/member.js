@@ -47,7 +47,7 @@ var main = {
     onSubmit : function(list) {
         console.log(list)
         $('.balance').attr('disabled', false);
-        $('.random').attr('disabled', false);
+        // $('.random').attr('disabled', false);
     }
 };
 
@@ -59,7 +59,7 @@ var entry = {
         send.first().val(data.id);
         etr.val(data.id);
         etr.contents()[0].textContent = data.name;
-        etr.contents()[1].textContent = data.winrate + "%";
+        etr.contents()[1].textContent = Math.ceil(data.winrate * 100)  + "%";
     },
     out : function(data, e) {
         var member = $('.member[value='+data.id+']');

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load lolteams_filter %}
 {% block content %}
     <form method="post">
         {% csrf_token %}
@@ -31,14 +32,14 @@
                     <th scope="col">승률</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="">
                 {% for member in member_list %}
                     <tr class="{% cycle 'table-primary' 'table-secondary' 'table-success' 'table-danger' 'table-warning' 'table-info' %}">
                         <th scope="row">{{forloop.counter}}</th>
                         <td class="fw-bold">{{member.name}}</td>
                         <td>{{member.win}}</td>
                         <td>{{member.lose}}</td>
-                        <td>{{member.winrate}}</td>
+                        <td>{{member.winrate|mul:"2"}}%</td>
                     </tr>
                 {% endfor %}
             </tbody>

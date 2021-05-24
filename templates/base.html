@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'bootstrap.min.css' %} ">
     <link rel="stylesheet" href="{% static 'style.css' %} ">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     {% if user.is_authenticated %}
 
     {%else%}
@@ -19,7 +20,7 @@
 {% if user.is_authenticated %}
 <nav class="navbar navbar-expand-lg navbar-light w-100 mb-5" style="background-color: #e3f2fd;">
   <div class="container-fluid">
-    <a class="navbar-brand fs-5" href="{% url 'lolteams:index' %}">팀즈</a>
+    <a class="navbar-brand fs-5" href="{% url 'lolteams:index' %}"><i class="fas fa-home-lg-alt"></i></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -33,7 +34,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)</a>
-          <span>또는 <a href="{% url 'common:signup' %}">계정을 만드세요.</a></span>
+          <!-- <span>또는 <a href="{% url 'common:signup' %}">계정을 만드세요.</a></span> -->
         </li>
       </ul>
     </div>

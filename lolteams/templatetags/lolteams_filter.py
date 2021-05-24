@@ -4,4 +4,4 @@ register = template.Library()
 
 @register.filter
 def mul(value, arg):
-    return value * 100
+    return round(value * 100)
