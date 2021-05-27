@@ -1,3 +1,14 @@
 .member:disabled {
     background-color: #ccc;
 }
+.league-list {
+    background-color: rgba( 255, 255, 255, 0.7 );
+}
+.victoryimg {
+    background: url("img/Victory.PNG") no-repeat;
+    background-size: 100% 100%;
+}
+.defeatimg {
+    background: url("img/defeat.PNG") no-repeat;
+    background-size: 100% 100%;
+}

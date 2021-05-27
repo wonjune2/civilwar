@@ -9,47 +9,57 @@
 <form method="post" action="{% url 'lolteams:league' %}">
     {% csrf_token %}
 <div class="row">
-        {% if blueTeams %}
-        <div class="col-md mb-3">
-            <h1 class="ms-5 fw-bold text-primary mb-3">블루팀</h1>
-            <h1 class="ms-5 fw-bold text-primary mb-3">{{ blue_win_rate }}%</h1>
-            {% for blueTeam in blueTeams %}
-                <div class="row">
-                    <div class="col-md d-flex">
-                        <h5 class="d-flex align-items-center text-primary mx-2">{{blueTeam.winrate|mul:"2"}}%</h5>
-                        <button type="button" class="btn btn-outline-dark w-75 fw-bolder">
-                            {{blueTeam.name}}
-                        </button>
-                        <input type="hidden" name="blueTeam" value="{{blueTeam.id}}" />
-                    </div>
-                </div>
-            {%endfor%}
-        </div>
-        {% endif %}
-        <div class="col-md-2 d-flex align-items-center justify-content-center mb-5">
-            <h1 class="text-danger mt-5">VS</h1>
-        </div>
-        <div class="col-md mb-3">
-            {% if redTeams %}
-            <div class="col-md">
-                <h1 class="me-5 fw-bold text-danger mb-3">레드팀</h1>
-                <h1 class="me-5 fw-bold text-danger mb-3">{{ red_win_rate }}%</h1>
-                {% for redTeam in redTeams %}
-                    <div class="row">
-                        <div class="col-md d-flex">
-                            <button type="button" class="btn btn-outline-dark fw-bolder w-75">
-                                {{redTeam.name}}
-                            </button>
-                            <input type="hidden" name="redTeam" value="{{redTeam.id}}" />
-                            <h5 class="d-flex align-items-center text-danger mx-2">{{redTeam.winrate|mul:"2"}}%</h5>
-                        </div>
-                    </div>
-                {%endfor%}
-            </div>
-            {% endif %}
-        </div>
+    <div class="col-md">
+        <h1 class="text-primary fw-bold">블루팀</h1>
+    </div>
+    <div class="col-md">
+        <h1 class="text-danger fw-bold">레드팀</h1>
+    </div>
 </div>
 <div class="row">
+    <div class="col-md">
+        <h3 class="text-primary">
+            {{blue_win_rate}}%
+        </h3>
+    </div>
+    <div class="col-md">
+        <h3 class="text-danger">
+            {{red_win_rate}}%
+        </h3>
+    </div>
+</div>
+<div class="row m-5">
+    <div class="col-md">
+        {% if blueTeams %}
+        <div class="list-group">
+            {% for blueTeam in blueTeams %}
+            <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center fw-bold">
+                <span class="badge bg-primary rounded-pill">{{blueTeam.winrate|mul:"2"}}%</span>
+                {{blueTeam.name}}
+                <input type="hidden" name="blueTeam" value="{{blueTeam.id}}" />
+            </button>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-2">
+        <h1 class="fw-bold text-danger">VS</h1>
+    </div>
+    <div class="col-md">
+        {% if redTeams %}
+        <div class="list-group">
+            {% for redTeam in redTeams %}
+            <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center fw-bold">
+                {{redTeam.name}}
+                <span class="badge bg-danger rounded-pill">{{redTeam.winrate|mul:"2"}}%</span>
+                <input type="hidden" name="redTeam" value="{{redTeam.id}}" />
+            </button>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+<div class="row m-5">
     <div class="col-md mb-3">
         <select name="blue" class="form-select w-25 mx-auto" id="inputGroupSelect01">
             <option selected value="0">0</option>

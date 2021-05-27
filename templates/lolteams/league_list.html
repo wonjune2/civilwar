@@ -16,28 +16,30 @@
     </div>
 </div>
 <div class="row mb-2 mt-0">
-    <div class="col-md ">
-        <ul class="list-group list-group-flush">
+    <div class="col-md">
+        {% if league.blue == "승" %}
+        <ul class="list-group list-group-flush victoryimg">
+        {%else%}
+        <ul class="list-group list-group-flush defeatimg">
+        {%endif%}
         {% for entry in entry_list %}
         {% if entry.league.id == league.id and entry.camp == '블루' %}
-            {% if league.blue == "승" %}
-            <li class="list-group-item fw-bold" style="background-color: #ADD8E6">{{entry.name}}</li>
-            {%else%}
-            <li class="list-group-item fw-bold" style="background-color: #FFB6C1;">{{entry.name}}</li>
-            {%endif%}
+            <li class="list-group-item fw-bold league-list">{{entry.name}}</li>
         {% endif %} 
         {% endfor %}   
         </ul>
     </div>
     <div class="col-md ">    
-        <ul class="list-group list-group-flush ">
+        {% if league.red == "승" %}
+        <ul class="list-group list-group-flush victoryimg">
+        {%else%}
+        <ul class="list-group list-group-flush defeatimg">
+        {%endif%}
         {% for entry in entry_list %}
         {% if entry.league.id == league.id and entry.camp == '레드' %}
-                {% if league.red == "승" %}
-                <li class="list-group-item fw-bold" style="background-color: #ADD8E6">{{entry.name}}</li>
-                {%else%}
-                <li class="list-group-item fw-bold" style="background-color: #FFB6C1;">{{entry.name}}</li>
-                {%endif%}
+                
+                <li class="list-group-item fw-bold league-list">{{entry.name}}</li>
+                
         {% endif %} 
         {% endfor %}   
         </ul>

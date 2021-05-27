@@ -16,9 +16,43 @@
             </div> 
         {% endif %}
         <!-- 오류표시 End -->
-        <div class="input-group mb-3">
-            <input type="text" name="name" class="form-control" placeholder="이름을 적어주세요" aria-label="이름을 적어주세요" value="{{ form.name.value|default_if_none:'' }}" aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">멤버등록</button>
+        <div class="row mb-2">
+            <div class="col-md">
+                <div class="card">
+                    <div class="card-header">
+                      티어 선택 설명
+                    </div>
+                    <div class="card-body">
+                      <blockquote class="blockquote mb-0">
+                        <p>티어를 선택해주세요. 티어를 선택해서 등록을 하면 선택한 초기 승률 값이 적용됩니다.</p>
+                        <footer class="blockquote-footer">단 첫판만 적용되고 첫 판 이후로는 승 패의 따라 정해집니다.</footer>
+                      </blockquote>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md">
+                <div class="input-group mb-3">
+                    <input type="text" name="name" class="form-control" placeholder="이름을 적어주세요" aria-label="이름을 적어주세요" value="{{ form.name.value|default_if_none:'' }}" aria-describedby="button-addon2">
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="input-group">
+                    <select class="form-select" name="winrate" id="inputGroupSelect04" aria-label="Example select with button addon">
+                      <option value="0" selected>티어를 선택해주세요(기본0%)</option>
+                      <option value="0.1">브론즈(10%)</option>
+                      <option value="0.3">실버(30%)</option>
+                      <option value="0.5">골드(50%)</option>
+                      <option value="0.6">플레티넘(60%)</option>
+                      <option value="0.7">다이아(70%)</option>
+                      <option value="0.8">마스터(80%)</option>
+                      <option value="0.9">그랜드마스터(90%)</option>
+                      <option value="1">챌린저(100%)</option>
+                    </select>
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">멤버등록</button>
+                  </div>
+            </div>
         </div>
     </form>
     {% if member_list %}

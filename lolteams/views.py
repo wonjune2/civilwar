@@ -21,8 +21,6 @@ def index(request):
             for case_a in cases:
                 blue = 0
                 red = 0
-                blueTeam = []
-                redTeam = []
                 for i in case_a:
                     red += i.winrate
                     redTeam = case_a
@@ -31,8 +29,8 @@ def index(request):
                     blue += i.winrate
                     blueTeam = case_b
                 if  abs(blue - red) < min_value:
-                    blueTeams = blueTeam
-                    redTeams = redTeam
+                    blueTeams = case_b
+                    redTeams = case_a
                 min_value = min(min_value, abs(blue - red))
             print(min_value)
             blue_win_rate = 0
@@ -57,6 +55,7 @@ def member(request):
     """
     lolteams 목록 출력
     """
+    # print(float(request.POST.get('winrate')))
     if request.method == 'POST':
         form = MemberForm(request.POST)
         if form.is_valid():
