@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load lolteams_filter %}
+{% load static %}
 {% block content %}
     <form method="post">
         {% csrf_token %}
@@ -61,19 +62,23 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">이름</th>
+                    <th></th>
                     <th scope="col">승</th>
                     <th scope="col">패</th>
                     <th scope="col">승률</th>
+                    <th scope="col">총 경기</th>
                 </tr>
             </thead>
             <tbody class="">
                 {% for member in member_list %}
                     <tr class="{% cycle 'table-primary' 'table-secondary' 'table-success' 'table-danger' 'table-warning' 'table-info' %}">
                         <th scope="row">{{forloop.counter}}</th>
-                        <td class="fw-bold">{{member.name}}</td>
+                        <td class="col-md-2 fw-bold">{{member.name}}</td>
+                        <td class="col-md-1 "><button type="button" class="btn btn-outline-dark btn-sm name-modify">이름 수정</button></td>
                         <td>{{member.win}}</td>
                         <td>{{member.lose}}</td>
                         <td>{{member.winrate|mul:"2"}}%</td>
+                        <td>{{member.total}}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -81,5 +86,7 @@
     {% else %}
     <p>멤버가 없습니다.</p>
     {% endif %}
-
 {% endblock%}
+{% block script %}
+<script src="{% static 'name-modify.js' %}"></script>
+{% endblock %}

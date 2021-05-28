@@ -8,16 +8,16 @@
     <link rel="stylesheet" href="{% static 'bootstrap.min.css' %} ">
     <link rel="stylesheet" href="{% static 'style.css' %} ">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    {% if user.is_authenticated %}
+    {#{% if user.is_authenticated %}#}
 
-    {%else%}
-    <link rel="stylesheet" href="{% static 'signin.css' %} ">
-    {%endif%}
+    {#{%else%}#}
+    <!-- <link rel="stylesheet" href="{% static 'signin.css' %} "> -->
+    {#{%endif%}#}
     <title>LoLTeams</title>
 </head>
 <body class="min-vh-100">
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
-{% if user.is_authenticated %}
+{#{% if user.is_authenticated %}#}
 <nav class="navbar navbar-expand-lg navbar-light w-100 mb-5" style="background-color: #e3f2fd;">
   <div class="container-fluid">
     <a class="navbar-brand fs-5" href="{% url 'lolteams:index' %}"><i class="fas fa-home-lg-alt"></i></a>
@@ -45,11 +45,12 @@
 {% endblock %}
 </div>
 <!-- 기본 템플릿 안에 삽입될 내용 End -->
-{%else%}
-{% include "common/login.html" %}
-{% endif %}
+{#{%else%}#}
+{#{% include "common/login.html" %}#}
+{#{% endif %}#}
 <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
-<script src="{% static 'member.js' %}"></script>
+{% block script %}
+{% endblock %}
 </body>
 </html>
