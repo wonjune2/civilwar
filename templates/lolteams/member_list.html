@@ -27,6 +27,7 @@
                       <blockquote class="blockquote mb-0">
                         <p>티어를 선택해주세요. 티어를 선택해서 등록을 하면 선택한 초기 승률 값이 적용됩니다.</p>
                         <footer class="blockquote-footer">단 첫판만 적용되고 첫 판 이후로는 승 패의 따라 정해집니다.</footer>
+                        <p>이름을 클릭하면 상세화면으로 넘어가며 이름 옆 아이콘을 클릭해서 이름을 변경할 수 있습니다.</p>
                       </blockquote>
                     </div>
                   </div>
@@ -62,7 +63,6 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">이름</th>
-                    <th></th>
                     <th scope="col">승</th>
                     <th scope="col">패</th>
                     <th scope="col">승률</th>
@@ -71,10 +71,9 @@
             </thead>
             <tbody class="">
                 {% for member in member_list %}
-                    <tr class="{% cycle 'table-primary' 'table-secondary' 'table-success' 'table-danger' 'table-warning' 'table-info' %}">
+                    <tr class="{% cycle 'table-primary' 'table-secondary' 'table-success' 'table-danger' 'table-warning' 'table-info' %} tr-line">
                         <th scope="row">{{forloop.counter}}</th>
-                        <td class="col-md-2 fw-bold">{{member.name}}</td>
-                        <td class="col-md-1 "><button type="button" class="btn btn-outline-dark btn-sm name-modify">이름 수정</button></td>
+                        <td class="col-md-2 fw-bold"><a href="{% url 'lolteams:member_detail' member.id %}" class="text-decoration-none text-dark">{{member.name}}</a></td>
                         <td>{{member.win}}</td>
                         <td>{{member.lose}}</td>
                         <td>{{member.winrate|mul:"2"}}%</td>
@@ -87,6 +86,3 @@
     <p>멤버가 없습니다.</p>
     {% endif %}
 {% endblock%}
-{% block script %}
-<script src="{% static 'name-modify.js' %}"></script>
-{% endblock %}

@@ -1,5 +1,58 @@
-<h1>{{ member.name }}</h1>
-
-<div>
-    {{ member.winrate }}
-</div>
+{% extends 'base.html' %}
+{% load lolteams_filter %}
+{% load static %}
+{% block content %}
+<div class="card mb-2">
+    <div class="card-body">
+    <form method="POST">
+        {% csrf_token %}
+        <h5 class="card-title text-md-start ms-3 fw-bold name-place">
+            {{member.name}}
+            <a href="#" class="text-decoration-none text-dark name-modify">
+                <i class="fas fa-edit"></i>
+            </a>
+        </h5>
+    </form>
+      <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">승</th>
+                <th scope="col">패</th>
+                <th scope="col">총 게임</th>
+                <th scope="col">승률</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{member.win}}</td>
+                <td>{{member.lose}}</td>
+                <td>{{member.total}}</td>
+                <td>{{member.winrate|mul:"2"}}%</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+  <table class="table">
+    <tbody>
+    {% if entry_list %}
+    {% for entry in entry_list %}
+    {% if entry.result == '승'%}
+      <tr class="table-primary">
+    {% else %}
+        <tr class="table-danger">
+    {% endif %}
+        <th scope="row">{{entry.result}}</th>
+        <td>{{entry.camp}}팀</td>
+        <td>{{entry.create_date}}</td>
+      </tr>
+    {% endfor %}
+    {% endif %}
+    </tbody>
+  </table>
+{% endblock%}
+{% block script %}
+<script src="{% static 'name-modify.js' %}"></script>
+{% endblock %}

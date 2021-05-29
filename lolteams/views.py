@@ -76,12 +76,18 @@ def member(request):
     return render(request, 'lolteams/member_list.html', context)
 
 
-def detail(request, member_id):
+def member_detail(request, member_id):
     """
     lolteams 내용 출력
     """
     member = get_object_or_404(Member, pk=member_id)
-    context = {'member': member}
+    print("member_id : ",member_id)
+    if request.method == "POST":
+        member.name = request.POST.get('name')
+        member.save()
+        return redirect('lolteams:member_detail', member_id=member_id)
+    entry_list = Entry.objects.filter(member=member)
+    context = {'member': member, 'entry_list' : entry_list}
     return render(request, 'lolteams/member_detail.html', context)
 
 
