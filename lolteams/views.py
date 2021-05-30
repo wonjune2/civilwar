@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import Member, League, Entry
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .forms import MemberForm
+from .forms import MemberForm, MemberModify
 import itertools
 import sys
 # Create your views here.
@@ -83,12 +83,16 @@ def member_detail(request, member_id):
     member = get_object_or_404(Member, pk=member_id)
     print("member_id : ",member_id)
     if request.method == "POST":
-        member.name = request.POST.get('name')
-        member.save()
-        return redirect('lolteams:member_detail', member_id=member_id)
+        form = MemberModify(request.POST, instance=member)
+        if form.is_valid():
+            member = form.save()
+            member.save()
+            return redirect('lolteams:member_detail', member_id=member_id)
+    else :
+        form = MemberModify()
     entry_list = Entry.objects.filter(member=member)
-    context = {'member': member, 'entry_list' : entry_list}
-    return render(request, 'lolteams/member_detail.html', context)
+    context = {'member': member, 'entry_list' : entry_list, 'form' : form}
+    return render(request, 'lolteams/member_detail.html', context) 
 
 
 def league(request):

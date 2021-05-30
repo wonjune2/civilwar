@@ -2,6 +2,21 @@
 {% load lolteams_filter %}
 {% load static %}
 {% block content %}
+{% if form.errors %}
+<div class="row">
+  <div class="col-md">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {% for field in form %}
+        {% if field.errors %}
+          <strong>{{ field.label }}</strong>
+          {{ field.errors }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
 <div class="card mb-2">
     <div class="card-body">
     <form method="POST">

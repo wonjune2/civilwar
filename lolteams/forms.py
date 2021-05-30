@@ -8,3 +8,11 @@ class MemberForm(forms.ModelForm):
         labels = {
             'name' : '멤버'
         }
+
+class MemberModify(forms.ModelForm):
+    class Meta:
+        model = Member
+        fields = ['name']
+        labels = {
+            'name' : '멤버'
+        }
