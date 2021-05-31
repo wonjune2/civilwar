@@ -23,9 +23,9 @@
             <button type="submit" class="btn btn-success mb-5 random" disabled>랜덤 뽑기</button>
         </form>
     </div>
-    <div class="col-md-6" data-bs-spy="scroll">
+    <div class="col-md-6">
         {% if member_list %}
-        <div class="btn-group-vertical w-50 mx-auto mb-5">
+        <div class="btn-group-vertical w-50 mx-auto">
             {% for member in member_list %}
             <button type="button" class="btn btn-outline-dark fw-bolder member" value="{{member.id}}">
                 {{member.name}}
