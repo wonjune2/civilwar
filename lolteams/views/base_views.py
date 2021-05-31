@@ -1,13 +1,8 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Member, League, Entry
+from ..models import Member, League
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .forms import MemberForm, MemberModify
 import itertools
 import sys
-# Create your views here.
-
 
 def index(request):
     if request.method == 'POST':
@@ -49,53 +44,13 @@ def index(request):
             else:
                 context = {'redTeams': blueTeams, 'blueTeams': redTeams,
                            'red_win_rate': blue_win_rate, 'blue_win_rate': red_win_rate}
-            return render(request, 'lolteams/league.html', context)
+            return render(request, 'lolteams/entry.html', context)
     else:
         member_list = Member.objects.order_by('name')
         context = {'member_list': member_list, 'count': range(10)}
         return render(request, 'lolteams/teams.html', context)
 
-
-def member(request):
-    """
-    lolteams 목록 출력
-    """
-    # print(float(request.POST.get('winrate')))
-    if request.method == 'POST':
-        form = MemberForm(request.POST)
-        if form.is_valid():
-            member = form.save(commit=False)
-            member.create_date = timezone.now()
-            member.save()
-            form = MemberForm()
-            return redirect('lolteams:member')
-    else:
-        form = MemberForm()
-    member_list = Member.objects.order_by('-winrate', 'name')
-    context = {'member_list': member_list, 'form': form}
-    return render(request, 'lolteams/member_list.html', context)
-
-
-def member_detail(request, member_id):
-    """
-    lolteams 내용 출력
-    """
-    member = get_object_or_404(Member, pk=member_id)
-    print("member_id : ",member_id)
-    if request.method == "POST":
-        form = MemberModify(request.POST, instance=member)
-        if form.is_valid():
-            member = form.save()
-            member.save()
-            return redirect('lolteams:member_detail', member_id=member_id)
-    else :
-        form = MemberModify()
-    entry_list = Entry.objects.filter(member=member)
-    context = {'member': member, 'entry_list' : entry_list, 'form' : form}
-    return render(request, 'lolteams/member_detail.html', context) 
-
-
-def league(request):
+def entry(request):
     """
     league 등록
     """
@@ -164,15 +119,4 @@ def league(request):
             error = "승점을 꼭 선택해 주셔야 합니다."
             context = {'blueTeams': blueTeams, 'redTeams': redTeams, 'error': error,
                        'blue_win_rate': blue_win_rate, 'red_win_rate': red_win_rate}
-            return render(request, 'lolteams/league.html', context)
-
-
-def league_list(request):
-    """
-    league_list
-    """
-    league_list = League.objects.order_by('-create_date')
-    entry_list = Entry.objects.all()
-
-    context = {'league_list': league_list, 'entry_list': entry_list}
-    return render(request, 'lolteams/league_list.html', context)
+            return render(request, 'lolteams/entry.html', context)

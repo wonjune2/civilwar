@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from lolteams import views
+from lolteams.views import base_views
 from django.urls import path, include
 
 urlpatterns = [
-    path('' ,views.index, name="index"),
+    path('' ,base_views.index, name="index"),
     path('admin/', admin.site.urls),
     path('lolteams/', include('lolteams.urls')),
     path('common/', include('common.urls')),
